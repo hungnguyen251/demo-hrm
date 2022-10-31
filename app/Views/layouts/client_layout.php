@@ -9,7 +9,8 @@
 <body>
     <?php
     $this->render('blocks/header');
-    $this->render($content,$sub_content);
+    // $this->render($content,$sub_content);
+    $this->render('homes/dashboard');
     $this->render('blocks/footer');
     ?>
 </body>
