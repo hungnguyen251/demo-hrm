@@ -9,6 +9,7 @@ if (!empty($_SERVER['argv'][1]) && "make:controller" == $_SERVER['argv'][1]) {
         if (!file_exists('app/Controllers/'. $nameController .'.php')) {
             $data = '<?php
 namespace App\Controller;
+
 use Controller;
 
 class '.$nameController.' extends Controller

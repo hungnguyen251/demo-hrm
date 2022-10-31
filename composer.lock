@@ -159,6 +159,7 @@
                 "ircmaxell/php-yacc": "^0.0.7",
                 "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/php-parse"
             ],
@@ -318,12 +319,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "74b7413e8d9788df77e296adabd7c1f6ca801a99"
+                "reference": "1fa9e9b4fd6a72467b5092e55b9f33786e780c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/74b7413e8d9788df77e296adabd7c1f6ca801a99",
-                "reference": "74b7413e8d9788df77e296adabd7c1f6ca801a99",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1fa9e9b4fd6a72467b5092e55b9f33786e780c99",
+                "reference": "1fa9e9b4fd6a72467b5092e55b9f33786e780c99",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +388,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-21T12:10:51+00:00"
+            "time": "2022-10-29T05:19:36+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -636,12 +637,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7847a4a920f686db261da1ccc92120800822661f"
+                "reference": "1d6a6ad3bbecdf633b0e71f5bc580572b39dbfb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7847a4a920f686db261da1ccc92120800822661f",
-                "reference": "7847a4a920f686db261da1ccc92120800822661f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1d6a6ad3bbecdf633b0e71f5bc580572b39dbfb8",
+                "reference": "1d6a6ad3bbecdf633b0e71f5bc580572b39dbfb8",
                 "shasum": ""
             },
             "require": {
@@ -730,7 +731,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-19T10:44:50+00:00"
+            "time": "2022-10-29T05:20:47+00:00"
         },
         {
             "name": "sebastian/cli-parser",
