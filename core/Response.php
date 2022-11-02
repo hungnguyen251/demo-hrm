@@ -25,7 +25,7 @@ class Response
         header("Content-type: application/json; charset=utf-8");
 
         //Thiết lập HTTP response code, 2xx = SUCCESS, 
-        $json = json_encode($data);
+        $json = json_encode($this->utf8ize($data));
         if ($json === false) {
             $json = json_encode(["jsonError" => json_last_error_msg()]);
             if ($json === false) {
@@ -44,6 +44,20 @@ class Response
         exit();
     }
 
+    /** Error 'Malformed UTF-8 characters, possibly incorrectly encoded'
+    * Fix lỗi mã hóa sai json_encode bởi một số ký tự UTF-8 không đúng định dạng
+    */
+    function utf8ize($data) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data[$key] = $this->utf8ize($value);
+            }
+        } elseif (is_string($data)) {
+            return mb_convert_encoding($data, "UTF-8", "UTF-8");
+        }
+        return $data;
+    }
+    
     /**
      * Response array->xml
      */

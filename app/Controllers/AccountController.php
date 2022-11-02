@@ -19,7 +19,7 @@ class AccountController extends Controller
     }
 
     public function index() {
-        $accounts = $this->db->table($this->table)->select('id')->get();
+        $accounts = $this->db->table($this->table)->get();
 
         return $this->response->json($accounts);
     }
