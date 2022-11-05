@@ -5,10 +5,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="" class="nav-link">Contact</a>
+            <a href="#" class="nav-link">Liên hệ</a>
         </li>
         <button type="button" class="btn btn-block btn-warning" style="position:absolute;right:20px;width:100px;"><a href="" style="color:black;">Đăng xuất</a></button>
     </ul>
