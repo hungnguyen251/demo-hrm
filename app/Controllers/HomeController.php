@@ -14,8 +14,8 @@ class HomeController extends Controller
     }
     
     public function index() {
-        $this->data['sub_content']['new_title'] = 'Trang chủ';
-        $this->data['content'] = 'home/index';
+        $this->data['sub_content']['new_title'] = '';
+        $this->data['content'] = 'homes/dashboard';
 
         $this->render('layouts\client_layout', $this->data);
     }

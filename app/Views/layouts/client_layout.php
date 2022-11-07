@@ -9,11 +9,11 @@
 <body>
     <?php
     $this->render('blocks/header');
+    $this->render('blocks/scripts');
     $this->render('blocks/navbar');
     $this->render('blocks/sidebar');
     $this->render($content,$sub_content);
     $this->render('blocks/footer');
-    $this->render('blocks/scripts');
     ?>
 </body>
 </html>

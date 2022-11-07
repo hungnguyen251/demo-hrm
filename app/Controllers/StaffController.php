@@ -21,7 +21,11 @@ class StaffController extends Controller
     public function index() {
         $staffs = $this->db->table($this->table)->get();
 
-        return $this->response->json($staffs);
+        // return $this->response->json($staffs);
+        $this->data['sub_content']['new_title'] = $staffs;
+        $this->data['content'] = 'staffs/staff';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 
     public function store($data) {
@@ -62,6 +66,22 @@ class StaffController extends Controller
             $mess = $exception->getMessage();
             die($mess);
         }
+    }
+
+    public function getUserInfo($id=2) {
+        $user = $this->db->table($this->table)
+        ->leftJoin('department_info', 'staff_info.department_id = department_info.id')
+        ->leftJoin('diploma', 'staff_info.diploma_id = diploma.id')
+        ->leftJoin('position', 'staff_info.position_id = position.id')
+        ->leftJoin('marriage_status', 'staff_info.marriage_code = marriage_status.id')
+        ->leftJoin('staff_type', 'staff_info.staff_type_id = staff_type.id')
+        ->leftJoin('reward_discipline', 'staff_info.id = reward_discipline.staff_id')
+        ->where('staff_info.id','=', $id)->get();
+
+        $this->data['sub_content']['user_info'] = $user;
+        $this->data['content'] = 'profile/show';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 }
         
