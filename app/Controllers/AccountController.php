@@ -85,7 +85,7 @@ class AccountController extends Controller
                 if ($userCheck) {
                     Session::flash('login_user', $userCheck);
 
-                    $this->response->redirect('staff/getUserInfo');
+                    $this->response->redirect('staff/getUserInfo/' . $userCheck['staff_id']);
                 }
             }
         }

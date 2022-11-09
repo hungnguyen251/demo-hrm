@@ -10,6 +10,6 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Liên hệ</a>
         </li>
-        <button type="button" class="btn btn-block btn-warning" style="position:absolute;right:20px;width:100px;"><a href="" style="color:black;">Đăng xuất</a></button>
+        <button type="button" class="btn btn-block btn-warning" style="position:absolute;right:20px;width:100px;"><a href="{{ __WEB__ROOT . '/account/logout'}}" style="color:black;">Đăng xuất</a></button>
     </ul>
 </nav>

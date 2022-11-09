@@ -68,7 +68,7 @@ class StaffController extends Controller
         }
     }
 
-    public function getUserInfo($id=2) {
+    public function getUserInfo($id) {
         $user = $this->db->table($this->table)
         ->leftJoin('department_info', 'staff_info.department_id = department_info.id')
         ->leftJoin('diploma', 'staff_info.diploma_id = diploma.id')
