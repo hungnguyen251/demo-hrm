@@ -97,9 +97,9 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/account/index'}}" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
-                        <p>Danh sách quản trị viên</p>
+                        <p>Danh sách tài khoản</p>
                     </a>
                 </li>
 

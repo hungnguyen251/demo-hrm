@@ -4,7 +4,9 @@ namespace App\Controller;
 use App\Models\Account;
 use Controller;
 use Exception;
+use Request;
 use Response;
+use Session;
 
 class AccountController extends Controller
 {
@@ -21,7 +23,11 @@ class AccountController extends Controller
     public function index() {
         $accounts = $this->db->table($this->table)->get();
 
-        return $this->response->json($accounts);
+        // return $this->response->json($accounts);
+        $this->data['sub_content']['accounts'] = $accounts;
+        $this->data['content'] = 'accounts/show';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 
     public function store($data) {
@@ -62,6 +68,41 @@ class AccountController extends Controller
             $mess = $exception->getMessage();
             die($mess);
         }
+    }
+
+    public function login() {
+        $this->data['errors_signin'] = Session::flash('errors_signin');
+        $this->data['msg_signin'] = Session::flash('msg_signin');
+        $this->data['old_signin'] = Session::data('old_signin');
+
+        if (!empty($this->data['old_signin'])) {
+            if (!empty($this->data['old_signin']['email']) && !empty($this->data['old_signin']['password'])) {
+                $email = $this->data['old_signin']['email'];
+                $password = $this->data['old_signin']['password'];
+
+                $userCheck = $this->db->table($this->table)->where('email','=', $email)->where('password','=', $password)->first();
+
+                if ($userCheck) {
+                    Session::flash('login_user', $userCheck);
+
+                    $this->response->redirect('staff/getUserInfo');
+                }
+            }
+        }
+
+        $this->render('accounts/signin', $this->data);
+    }
+
+    public function checkLogin() {
+        $this->accounts->validateData();
+
+        $this->response->redirect('account/login');
+    }
+
+    public function logout() {
+        Session::delete();
+
+        $this->response->redirect('account/login');
     }
 }
         
