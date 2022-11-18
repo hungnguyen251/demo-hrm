@@ -9,3 +9,4 @@
 <script src="{{ __WEB__ROOT . './public/plugins/jsgrid/jsgrid.min.js' }}"></script>
 <script src="{{ __WEB__ROOT . '/public/plugins/daterangepicker/daterangepicker.js' }}"></script>
 <script src="{{ __WEB__ROOT . '/public/plugins/inputmask/jquery.inputmask.min.js' }}"></script>
+<script src="{{ __WEB__ROOT . '/public/plugins/bootstrap-switch/js/bootstrap-switch.min.js' }}"></script>

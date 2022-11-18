@@ -16,8 +16,8 @@ class AccountController extends Controller
     public $data = [];
 
     public function __construct() {
-         $this->accounts = new Account();
-         $this->response = new Response();
+        $this->accounts = new Account();
+        $this->response = new Response();
     }
 
     public function index() {
@@ -63,6 +63,7 @@ class AccountController extends Controller
         //destroy
         try {
             $this->db->table($this->table)->where('id','=', $id)->delete();
+            $this->response->redirect('account/index');
         } catch (Exception $exception) {
             echo "Đã xảy ra lỗi khi xóa bản ghi";
             $mess = $exception->getMessage();
@@ -71,14 +72,14 @@ class AccountController extends Controller
     }
 
     public function login() {
-        $this->data['errors_signin'] = Session::flash('errors_signin');
-        $this->data['msg_signin'] = Session::flash('msg_signin');
-        $this->data['old_signin'] = Session::data('old_signin');
+        $this->data['errors'] = Session::flash('errors');
+        $this->data['msg'] = Session::flash('msg');
+        $this->data['old_data'] = Session::data('old_data');
 
-        if (!empty($this->data['old_signin'])) {
-            if (!empty($this->data['old_signin']['email']) && !empty($this->data['old_signin']['password'])) {
-                $email = $this->data['old_signin']['email'];
-                $password = $this->data['old_signin']['password'];
+        if (!empty($this->data['old_data'])) {
+            if (!empty($this->data['old_data']['email']) && !empty($this->data['old_data']['password'])) {
+                $email = $this->data['old_data']['email'];
+                $password = $this->data['old_data']['password'];
 
                 $userCheck = $this->db->table($this->table)->where('email','=', $email)->where('password','=', $password)->first();
 
@@ -103,6 +104,64 @@ class AccountController extends Controller
         Session::delete();
 
         $this->response->redirect('account/login');
+    }
+
+    public function create() {
+        $this->data['errors_account'] = Session::flash('errors_account');
+        $this->data['msg_account'] = Session::flash('msg_account');
+        $this->data['data_account'] = Session::flash('old_account');
+
+        $this->response->redirect('account/index');
+    }
+
+    public function checkStoreAccount() {
+        $this->accounts->validateData();
+
+        $this->response->redirect('account/storeAccount');
+    }
+
+    public function checkEditAccount($id) {
+        $this->accounts->validateData();
+
+        $this->response->redirect('account/edit/' . $id);
+    }
+
+    public function edit($id) {
+        global $config;
+        $account = $this->db->table($this->table)->where('id','=', $id)->get();
+        $sessionData = isset($_SESSION[$config['session']['session_key']]) ? $_SESSION[$config['session']['session_key']] : [];
+
+        if (isset($sessionData['errors'])) {
+            if (!isset($sessionData['errors']['first_name']) && !isset($sessionData['errors']['last_name']) && !isset($sessionData['errors']['email']) && !isset($sessionData['errors']['password']) && !isset($sessionData['errors']['phone'])) {
+                $status = isset($sessionData['old_data']['status']) && $sessionData['old_data']['status'] == 'on' ? 1 : 0;
+                switch ($sessionData['old_data']['decentralization']) {
+                    case 'Quản trị viên':
+                        $decentralization = 1;
+                        break;
+
+                    case 'Nhân viên':
+                        $decentralization = 2;
+                        break;
+
+                    case 'Kế toán':
+                        $decentralization = 3;
+                        break;
+
+                    default:
+                        $decentralization = 2;
+                        break;
+                }
+                $sessionData['old_data']['decentralization'] = $decentralization;
+                $sessionData['old_data']['status'] = $status;
+
+                $this->update($sessionData['old_data'], $id);
+            }
+        }
+
+        $this->data['sub_content']['accounts'] = $account;
+        $this->data['content'] = 'accounts/action';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 }
         

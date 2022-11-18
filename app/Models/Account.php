@@ -46,7 +46,7 @@ class Account extends Model
                 'password' => 'required|min:6',
                 'confirm_password' => 'required|min:3|match:password',
                 'phone' => 'required|int|callback_check_phone',
-                'descentralization' => 'required',
+                'decentralization' => 'required',
                 'staff_id' => 'required'
             ];
 
@@ -65,16 +65,16 @@ class Account extends Model
                 'confirm_password.match' => 'Mật khẩu nhập lại không khớp',
                 'phone.required' => 'Số điện thoại là bắt buộc',
                 'phone.callback_check_phone' => 'Sai định dạng Số điện thoại',
-                'descentralization.required' => 'Bắt buộc chọn quyền đăng nhập',
+                'decentralization.required' => 'Bắt buộc chọn quyền đăng nhập',
                 'staff_id.required' => 'Bắt buộc chọn ID nhân viên',
             ];
 
             $validate = $validator->make($rules,$message);
 
             if (!$validate) {
-                Session::flash('errors_signin', $validator->errors());
-                Session::flash('msg_signin', 'Đã xảy ra lỗi, vui lòng thử lại');
-                Session::flash('old_signin', $request->getFields());
+                Session::flash('errors', $validator->errors());
+                Session::flash('msg', 'Đã xảy ra lỗi, vui lòng thử lại');
+                Session::flash('old_data', $request->getFields());
             }  
             return $validate;
         }

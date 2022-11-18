@@ -15,7 +15,8 @@
     <section class="content-header">
       <div class="card">
         <div class="card-header d-flex" style="height: 65px;">
-          <a href="?action=add"  class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;">Thêm tài khoản</a>
+          <!-- <a href="?action=add"  class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;">Thêm tài khoản</a> -->
+          <button type="button" class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;" data-toggle="modal" data-target="#modal-lg">Thêm tài khoản</button>
         </div>
         <!-- /.card-header -->
         <!-- /.card-body -->
@@ -53,8 +54,9 @@
                     <td>
                         <div class="btn-group">
                             <!-- <a class="btn btn-warning" href="{{ __WEB__ROOT . '/app/views/accounts/edit.php?action=edit'}}">Sửa</a> -->
-                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/account/edit?action=edit'}}">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="?action=delete&id=">Xóa</a>
+                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/account/edit/' . $accounts[$i]['id']}}">Sửa</a>
+                            <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-lg">Sửa</button> -->
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="{{ __WEB__ROOT . '/account/destroy/' . $accounts[$i]['id']}}">Xóa</a>
                         </div>
                     </td>
                 </tr>

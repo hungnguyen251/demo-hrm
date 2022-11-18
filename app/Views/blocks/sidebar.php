@@ -69,7 +69,7 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="{{ __WEB__ROOT . '/staff/getUserInfo'}}" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/staff/getUserInfo/' . getSessionUser('staff_id')}}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>Thông tin cá nhân</p>
                     </a>
