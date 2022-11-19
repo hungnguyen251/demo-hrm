@@ -9,6 +9,8 @@ $routes['tai-khoan/them'] = 'account/create';
 $routes['tai-khoan/sua'] = 'account/edit';
 $routes['tai-khoan/xoa'] = 'account/destroy';
 
+$routes['cong-ty'] = 'company';
+
 // $routes['nhan-vien'] = 'staff';
 // $routes['nhan-vien/danh-sach'] = 'staff/index';
 

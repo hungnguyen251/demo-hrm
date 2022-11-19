@@ -39,6 +39,13 @@
                 </li>
 
                 <li class="nav-item menu-open">
+                    <a href="{{ __WEB__ROOT . '/cong-ty'}}" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Thông tin công ty</p>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>Nhân viên<i class="fas fa-angle-left right"></i></p>
@@ -72,13 +79,6 @@
                     <a href="{{ __WEB__ROOT . '/staff/getUserInfo/' . getSessionUser('staff_id')}}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>Thông tin cá nhân</p>
-                    </a>
-                </li>
-
-                <li class="nav-item menu-open">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fas fa-building"></i>
-                        <p>Thông tin công ty</p>
                     </a>
                 </li>
 

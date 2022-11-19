@@ -10,18 +10,21 @@ class CompanyController extends Controller
 {
     protected $table = 'company_info';
     public $response;
-    public $companies;
+    public $company;
     public $data = [];
 
     public function __construct() {
-         $this->companies = new Company();
+         $this->company = new Company();
          $this->response = new Response();
     }
 
     public function index() {
-        $companies = $this->db->table($this->table)->get();
+        $company = $this->db->table($this->table)->get();
 
-        return $this->response->json($companies);
+        $this->data['sub_content']['company'] = $company;
+        $this->data['content'] = 'company/show';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 
     public function store($data) {
