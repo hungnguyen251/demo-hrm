@@ -10,6 +10,24 @@
           </div>
         </div>
       </div><!-- /.container-fluid -->
+      @php
+      global $config;
+        $sessionData = isset($_SESSION[$config['session']['session_key']]) ? $_SESSION[$config['session']['session_key']] : [];
+      @endphp
+
+      @if (isset($sessionData['errors']))
+        @if (!isset($sessionData['errors']['first_name']) && !isset($sessionData['errors']['last_name']) && !isset($sessionData['errors']['email']) && !isset($sessionData['errors']['password']) && !isset($sessionData['errors']['phone']))
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-check"></i> Thông báo!</h5>
+            Sửa thông tin thành công
+          </div>
+        @endif
+      @endif
+      @php
+        Session::delete('errors');
+        Session::delete('old_data');
+      @endphp
     </section>
 
     <section class="content-header">

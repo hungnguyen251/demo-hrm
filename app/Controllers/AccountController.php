@@ -131,7 +131,7 @@ class AccountController extends Controller
         $account = $this->db->table($this->table)->where('id','=', $id)->get();
         $sessionData = isset($_SESSION[$config['session']['session_key']]) ? $_SESSION[$config['session']['session_key']] : [];
 
-        if (isset($sessionData['errors'])) {
+        if (isset($sessionData['errors']) && isset($sessionData['old_data']['submit'])) {
             if (!isset($sessionData['errors']['first_name']) && !isset($sessionData['errors']['last_name']) && !isset($sessionData['errors']['email']) && !isset($sessionData['errors']['password']) && !isset($sessionData['errors']['phone'])) {
                 $status = isset($sessionData['old_data']['status']) && $sessionData['old_data']['status'] == 'on' ? 1 : 0;
                 switch ($sessionData['old_data']['decentralization']) {
@@ -153,8 +153,14 @@ class AccountController extends Controller
                 }
                 $sessionData['old_data']['decentralization'] = $decentralization;
                 $sessionData['old_data']['status'] = $status;
+                unset($sessionData['old_data']['submit']);
 
-                $this->update($sessionData['old_data'], $id);
+                if (!isset($sessionData['old_data']['submit'])) {
+
+                    $this->update($sessionData['old_data'], $id);
+                    $this->response->redirect('account/index');
+                    exit;
+                }
             }
         }
 
@@ -164,4 +170,3 @@ class AccountController extends Controller
         $this->render('layouts\client_layout', $this->data);
     }
 }
-        
