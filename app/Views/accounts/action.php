@@ -26,7 +26,7 @@
                         <h3 class="card-title">Sửa thông tin</h3>
                     </div>
 
-                    <form method="post" action="{{ __WEB__ROOT . '/account/checkEditAccount/'. $accounts[0]['id'] }}">
+                    <form method="post" action="{{ __WEB__ROOT . '/account/check/'. $accounts[0]['id'] . '/edit' }}">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputEmail">Họ </label>

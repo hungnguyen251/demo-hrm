@@ -81,5 +81,36 @@ if (!function_exists('uploadFileImage')) {
 
         return $errUpload;
     }
+
+    if (!function_exists('getSessionUser')) {
+        function getSessionUser($fieldName='') {
+            global $config;
+            $sessionKey = $config['session']['session_key'];
+            if (!empty($_SESSION[$sessionKey])) {
+                if(!empty($_SESSION[$sessionKey]['login_user'])) {
+
+                    $sessionUserInfo =  $_SESSION[$sessionKey]['login_user'][$fieldName];
+                    return $sessionUserInfo;
+                }
+            } else {
+                return false;
+            }
+        }   
+    }
+
+    /**
+     * Lấy ra action
+     */
+    if (!function_exists('getUrlAction')) {
+        function getUrlAction() {
+            if(!empty($_SERVER['PATH_INFO'])) {
+                $url = $_SERVER['PATH_INFO'];
+                $checkAction = explode('/', $url);
+                return array_pop($checkAction);
+            } 
+
+            return false;
+        }   
+    }
 }
 ?>

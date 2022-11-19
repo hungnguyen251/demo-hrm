@@ -94,12 +94,6 @@ class AccountController extends Controller
         $this->render('accounts/signin', $this->data);
     }
 
-    public function checkLogin() {
-        $this->accounts->validateData();
-
-        $this->response->redirect('account/login');
-    }
-
     public function logout() {
         Session::delete();
 
@@ -114,16 +108,29 @@ class AccountController extends Controller
         $this->response->redirect('account/index');
     }
 
-    public function checkStoreAccount() {
+    public function check($id='') {
         $this->accounts->validateData();
 
-        $this->response->redirect('account/storeAccount');
-    }
+        $check = getUrlAction();
+        if (!empty($check) ) {
+            switch ($check) {
+                case 'edit':
+                    $this->response->redirect('account/edit/' . $id);
+                    break;
 
-    public function checkEditAccount($id) {
-        $this->accounts->validateData();
+                case 'create':
+                    $this->response->redirect('account/create');
+                    break;
 
-        $this->response->redirect('account/edit/' . $id);
+                case 'login':
+                    $this->response->redirect('account/login');
+                    break;
+
+                default:
+                    $this->response->redirect('home/index');
+                    break;
+            }
+        }
     }
 
     public function edit($id) {
