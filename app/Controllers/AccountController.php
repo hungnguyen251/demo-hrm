@@ -35,9 +35,13 @@ class AccountController extends Controller
         try {
             $this->db->table($this->table)->insert($data);
         } catch (Exception $exception) {
-            echo "Đã xảy ra lỗi thêm bản ghi";
             $mess = $exception->getMessage();
-            die($mess);
+
+            // die($mess);
+            $this->data['sub_content']['exception'] = $mess;
+            $this->data['content'] = 'accounts/add';
+    
+            $this->render('layouts\client_layout', $this->data);
         }
     }
 
@@ -101,11 +105,48 @@ class AccountController extends Controller
     }
 
     public function create() {
-        $this->data['errors_account'] = Session::flash('errors_account');
-        $this->data['msg_account'] = Session::flash('msg_account');
-        $this->data['data_account'] = Session::flash('old_account');
+        global $config;
+        $sessionData = isset($_SESSION[$config['session']['session_key']]) ? $_SESSION[$config['session']['session_key']] : [];
 
-        $this->response->redirect('account/index');
+        if (isset($sessionData['errors']) && isset($sessionData['old_data']['submit'])) {
+            if (!isset($sessionData['errors']['first_name']) && !isset($sessionData['errors']['last_name']) && !isset($sessionData['errors']['email']) && !isset($sessionData['errors']['password']) && !isset($sessionData['errors']['confirm_password']) && !isset($sessionData['errors']['phone']) && !isset($sessionData['errors']['staff_id'])) {
+                $status = isset($sessionData['old_data']['status']) && $sessionData['old_data']['status'] == 'on' ? 1 : 0;
+                switch ($sessionData['old_data']['decentralization']) {
+                    case 'Quản trị viên':
+                        $decentralization = 1;
+                        break;
+
+                    case 'Nhân viên':
+                        $decentralization = 2;
+                        break;
+
+                    case 'Kế toán':
+                        $decentralization = 3;
+                        break;
+
+                    default:
+                        $decentralization = 2;
+                        break;
+                }
+                $sessionData['old_data']['decentralization'] = $decentralization;
+                $sessionData['old_data']['status'] = $status;
+                $sessionData['old_data']['password'] = md5($sessionData['old_data']['password']);
+
+                unset($sessionData['old_data']['submit']);
+                unset($sessionData['old_data']['confirm_password']);
+
+                if (!isset($sessionData['old_data']['submit'])) {
+                    $this->store($sessionData['old_data']);
+                    $this->response->redirect('account/index');
+                    exit;
+                }
+            }
+        }
+
+        $this->data['sub_content']['account'] = '';
+        $this->data['content'] = 'accounts/add';
+
+        $this->render('layouts\client_layout', $this->data);
     }
 
     public function check($id='') {

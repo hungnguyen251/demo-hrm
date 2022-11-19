@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Sửa thông tin tài khoản</h1>
+            <h1>Thêm tài khoản</h1>
           </div>
           <div class="col-sm-6" style="text-align:right;">
             <form action="" method="post">
@@ -14,73 +14,85 @@
           </div>
         </div>
       </div>
+        @if (isset($exception))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Thông báo!</h5>
+                Đã xảy ra lỗi thêm bản ghi, vui lòng kiểm tra lại các thông tin đã nhập (Chú ý lỗi từ ID nhân viên phải có trên hệ thống)
+            </div>
+        @endif
     </section>
-      <!-- Notification success/failed -->
-
     <!-- Main content -->
     <section class="content">
         <div class="card">
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Sửa thông tin</h3>
+                        <h3 class="card-title">Thêm tài khoản</h3>
                     </div>
 
-                    <form method="post" action="{{ __WEB__ROOT . '/account/check/'. $accounts[0]['id'] . '/edit' }}">
+                    <form method="post" action="{{ __WEB__ROOT . '/account/check/create'}}">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputEmail">Họ </label>
-                                <input type="text" class="form-control" value="{{$accounts[0]['first_name']}}" name="first_name" placeholder="Nhập vào họ của nhân viên">
+                                <input type="text" class="form-control" value="{{oldData('first_name')}}" name="first_name" placeholder="Nhập vào họ của nhân viên">
                                 @php echo formError('first_name', '<span style="color:red;">','</span>') @endphp                    
                             </div>
 
                             <div class="form-group">
                                 <label for="inputPhone">Tên đệm và tên </label>
-                                <input type="text" class="form-control" value="{{$accounts[0]['last_name']}}" name="last_name"  placeholder="Nhập tên đệm và tên của nhân viên">
+                                <input type="text" class="form-control" value="{{oldData('last_name')}}" name="last_name"  placeholder="Nhập tên đệm và tên của nhân viên">
                                 @php echo formError('last_name', '<span style="color:red;">','</span>') @endphp
                             </div>
 
                             <div class="form-group">
                                 <label for="inputEmail">Email </label>
-                                <input type="email" class="form-control" value="{{$accounts[0]['email']}}" name="email" id="inputEmail" placeholder="Nhập vào email">
+                                <input type="email" class="form-control" value="{{oldData('email')}}" name="email" id="inputEmail" placeholder="Nhập vào email">
                                 @php echo formError('email', '<span style="color:red;">','</span>')@endphp
                             </div>
 
                             <div class="form-group">
                                 <label for="inputPhone">Số điện thoại </label>
-                                <input type="text" class="form-control" value="{{$accounts[0]['phone']}}" name="phone" id="inputPhone" placeholder="Nhập số điện thoại">
+                                <input type="text" class="form-control" value="{{oldData('phone')}}" name="phone" id="inputPhone" placeholder="Nhập số điện thoại">
                                 @php echo formError('phone', '<span style="color:red;">','</span>') @endphp
                             </div>
                             
                             <div class="form-group">
                                 <label for="inputPasswd">Mật khẩu (*)</label>
-                                <input type="password" class="form-control" value="{{$accounts[0]['password']}}" name="password" id="inputEmail" placeholder="Nhập vào mật khẩu">
+                                <input type="password" class="form-control" value="" name="password" id="inputPassword" placeholder="Nhập vào mật khẩu">
                                 @php echo formError('password', '<span style="color:red;">','</span>') @endphp
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputConfirmPassword">Nhập lại mật khẩu (*)</label>
+                                <input type="password" class="form-control" value="" name="confirm_password" id="inputConfirmPassword" placeholder="Nhập lại mật khẩu">
+                                @php echo formError('confirm_password', '<span style="color:red;">','</span>') @endphp
+                            </div>
+
+                            <div class="form-group">
+                                <label>ID nhân viên</label>
+                                <input type="text" class="form-control" value="" name="staff_id" id="inputStaffId" placeholder="Nhập vào ID nhân viên">
                             </div>
 
                             <div class="form-group">
                                 <label for="inputDecentralization">Phân quyền </label>
                                 <select class="form-control" name="decentralization">
-                                  <option {{ $accounts[0]['decentralization'] == '1' ? 'selected' : ''}}>Quản trị viên</option>
-                                  <option {{ $accounts[0]['decentralization'] == '2' ? 'selected' : ''}}>Nhân viên</option>
-                                  <option {{ $accounts[0]['decentralization'] == '3' ? 'selected' : ''}}>Kế toán</option>
+                                    <option>-</option>
+                                    <option>Nhân viên</option>
+                                    <option>Quản trị viên</option>
+                                    <option>Kế toán</option>
                                 </select>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Mã nhân viên</label>
-                                <select class="form-control" name="position">
-                                    <option>{{$accounts[0]['staff_id']}}</option>
-                                </select>
-                            </div> -->
                             
                             <div class="form-group">
                                 <label>Phòng ban</label>
                                 <select class="form-control" name="department" value="test">
-                                    <option {{ $accounts[0]['department'] == 'Phòng tổ chức - hành chính' ? 'selected' : ''}}>Phòng tổ chức - hành chính</option>
-                                    <option {{ $accounts[0]['department'] == 'Phòng kĩ thuật' ? 'selected' : ''}}>Phòng kĩ thuật</option>
-                                    <option {{ $accounts[0]['department'] == 'Phòng tài chính - kế toán' ? 'selected' : ''}}>Phòng tài chính - kế toán</option>
-                                    <option {{ $accounts[0]['department'] == 'Phòng IT' ? 'selected' : ''}}>Phòng IT</option>
-                                    <option {{ $accounts[0]['department'] == 'Phòng Marketing' ? 'selected' : ''}}>Phòng Marketing</option>
+                                    <option>-</option>
+                                    <option>Phòng tổ chức - hành chính</option>
+                                    <option>Phòng kĩ thuật</option>
+                                    <option>Phòng tài chính - kế toán</option>
+                                    <option>Phòng IT</option>
+                                    <option>Phòng Marketing</option>
                                 </select>
                             </div>
 
@@ -88,7 +100,7 @@
                                 <label>Trạng thái</label>
                                 <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-focused bootstrap-switch-animate bootstrap-switch-on" style="width: 86px;">
                                     <div class="bootstrap-switch-container" style="width: 126px; margin-left: 0px;">
-                                        <input type="checkbox" name="status" {{ $accounts[0]['status'] == '0' ? '' : 'checked' }} data-bootstrap-switch="">
+                                        <input type="checkbox" name="status" checked data-bootstrap-switch="">
                                     </div>
                                 </div>
                             </div>

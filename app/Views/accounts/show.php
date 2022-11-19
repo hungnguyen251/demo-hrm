@@ -20,13 +20,18 @@
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h5><i class="icon fas fa-check"></i> Thông báo!</h5>
-            Sửa thông tin thành công
+            @if (isset($sessionData['old_data']['staff_id'])) 
+              {{'Thêm tài khoản thành công'}}
+            @else
+            {{'Thay đổi thông tin tài khoản thành công'}}
+            @endif
           </div>
         @endif
       @endif
       @php
         Session::delete('errors');
         Session::delete('old_data');
+        Session::delete('msg');
       @endphp
     </section>
 
@@ -34,7 +39,7 @@
       <div class="card">
         <div class="card-header d-flex" style="height: 65px;">
           <!-- <a href="?action=add"  class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;">Thêm tài khoản</a> -->
-          <button type="button" class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;" data-toggle="modal" data-target="#modal-lg">Thêm tài khoản</button>
+          <a href="{{ __WEB__ROOT . '/tai-khoan/them'}}" class="btn btn-block btn-info" style="position: absolute;width: 150px; right: 40px;">Thêm tài khoản</a>
         </div>
         <!-- /.card-header -->
         <!-- /.card-body -->
@@ -72,9 +77,9 @@
                     <td>
                         <div class="btn-group">
                             <!-- <a class="btn btn-warning" href="{{ __WEB__ROOT . '/app/views/accounts/edit.php?action=edit'}}">Sửa</a> -->
-                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/account/edit/' . $accounts[$i]['id']}}">Sửa</a>
+                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/tai-khoan/sua/' . $accounts[$i]['id']}}">Sửa</a>
                             <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-lg">Sửa</button> -->
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="{{ __WEB__ROOT . '/account/destroy/' . $accounts[$i]['id']}}">Xóa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="{{ __WEB__ROOT . '/tai-khoan/xoa/' . $accounts[$i]['id']}}">Xóa</a>
                         </div>
                     </td>
                 </tr>
