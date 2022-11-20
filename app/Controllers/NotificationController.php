@@ -60,7 +60,7 @@ class NotificationController extends Controller
         //destroy
         try {
             $this->db->table($this->table)->where('id','=', $id)->delete();
-            $this->response->redirect('notification/index');
+            $this->response->redirect('thong-bao');
         } catch (Exception $exception) {
             echo "Đã xảy ra lỗi khi xóa bản ghi";
             $mess = $exception->getMessage();
@@ -88,7 +88,7 @@ class NotificationController extends Controller
             }
         }
 
-        $this->response->redirect('notification/index');
+        $this->response->redirect('thong-bao');
     }
 
     public function create() {
@@ -121,7 +121,7 @@ class NotificationController extends Controller
             ];
 
             $this->store($data);
-            $this->response->redirect('notification/index');
+            $this->response->redirect('thong-bao');
             exit;
         }
         

@@ -137,7 +137,7 @@ class AccountController extends Controller
 
                 if (!isset($sessionData['old_data']['submit'])) {
                     $this->store($sessionData['old_data']);
-                    $this->response->redirect('account/index');
+                    $this->response->redirect('tai-khoan');
                     exit;
                 }
             }
@@ -206,7 +206,7 @@ class AccountController extends Controller
                 if (!isset($sessionData['old_data']['submit'])) {
 
                     $this->update($sessionData['old_data'], $id);
-                    $this->response->redirect('account/index');
+                    $this->response->redirect('tai-khoan');
                     exit;
                 }
             }

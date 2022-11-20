@@ -18,6 +18,11 @@ $routes['thong-bao/them'] = 'notification/create';
 
 $routes['phong-ban'] = 'department';
 
+$routes['giai-thuong'] = 'reward';
+$routes['giai-thuong/them'] = 'reward/create';
+$routes['giai-thuong/sua'] = 'reward/edit';
+$routes['giai-thuong/xoa'] = 'reward/destroy';
+
 // $routes['nhan-vien'] = 'staff';
 // $routes['nhan-vien/danh-sach'] = 'staff/index';
 

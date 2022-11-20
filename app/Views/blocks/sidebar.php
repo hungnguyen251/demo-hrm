@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-navy elevation-4" style="background-color: #001f3f;">
     <!-- Brand Logo -->
-    <a href="{{ __WEB__ROOT . '/home/index'}}" class="brand-link">
+    <a href="{{ __WEB__ROOT . '/cong-ty'}}" class="brand-link">
         <img src="{{ __WEB__ROOT . '/public/dist/img/logo-gv.png'}}" alt="Logo Brand" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">GV Asia</span>
     </a>
@@ -12,7 +12,7 @@
                 <img src="{{ __WEB__ROOT . '/public/dist/img/avatar-me.png'}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ __WEB__ROOT . '/home/index'}}" class="d-block">Nguyễn Mạnh Hùng</a>
+                <a href="{{ __WEB__ROOT . '/cong-ty'}}" class="d-block">Nguyễn Mạnh Hùng</a>
             </div>
         </div>
       <!-- SidebarSearch Form -->
@@ -32,7 +32,7 @@
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/trang-chu/thong-ke'}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Trang tổng quan</p>
                     </a>
@@ -83,7 +83,7 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="{{ __WEB__ROOT . '/phong-ban/'}}" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/phong-ban'}}" class="nav-link">
                         <i class="nav-icon fas fa-house-user"></i>
                         <p>Danh sách phòng ban</p>
                     </a>
@@ -104,7 +104,7 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="{{ __WEB__ROOT . '/reward/index' }}" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/giai-thuong'}}" class="nav-link">
                         <i class="nav-icon fas fa-trophy"></i>
                         <p>Khen thưởng</p>
                     </a>
