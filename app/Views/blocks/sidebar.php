@@ -83,7 +83,7 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="" class="nav-link">
+                    <a href="{{ __WEB__ROOT . '/phong-ban/'}}" class="nav-link">
                         <i class="nav-icon fas fa-house-user"></i>
                         <p>Danh sách phòng ban</p>
                     </a>

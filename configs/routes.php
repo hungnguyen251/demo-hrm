@@ -16,14 +16,13 @@ $routes['thong-bao/xoa'] = 'notification/destroy';
 $routes['thong-bao/thao-tac'] = 'notification/changeStatus';
 $routes['thong-bao/them'] = 'notification/create';
 
+$routes['phong-ban'] = 'department';
+
 // $routes['nhan-vien'] = 'staff';
 // $routes['nhan-vien/danh-sach'] = 'staff/index';
 
 // $routes['giai-thuong'] = 'reward';
 // $routes['giai-thuong/danh-sach'] = 'reward/index';
-
-// $routes['phong-ban'] = 'department';
-// $routes['phong-ban/danh-sach'] = 'department/index';
 
 // $routes['bang-cap'] = 'diploma';
 // $routes['bang-cap/danh-sach'] = 'diploma/index';
