@@ -11,6 +11,11 @@ $routes['tai-khoan/xoa'] = 'account/destroy';
 
 $routes['cong-ty'] = 'company';
 
+$routes['thong-bao'] = 'notification';
+$routes['thong-bao/xoa'] = 'notification/destroy';
+$routes['thong-bao/thao-tac'] = 'notification/changeStatus';
+$routes['thong-bao/them'] = 'notification/create';
+
 // $routes['nhan-vien'] = 'staff';
 // $routes['nhan-vien/danh-sach'] = 'staff/index';
 

@@ -21,7 +21,7 @@ class AccountController extends Controller
     }
 
     public function index() {
-        $accounts = $this->db->table($this->table)->get();
+        $accounts = $this->db->table($this->table)->orderBy('created_at','DESC')->get();
 
         // return $this->response->json($accounts);
         $this->data['sub_content']['accounts'] = $accounts;
