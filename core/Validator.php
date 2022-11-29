@@ -91,6 +91,14 @@ class Validator
                         }
                     }
 
+                    if ('same' == $ruleName) {
+                        //Điều kiện so khớp mật khẩu ...
+                        if (!empty($dataField[$fieldName]) && trim($dataField[$fieldName]) == $ruleValue) {
+                            $this->setErrors($fieldName, $ruleName);
+                            $checkValidate = false;
+                        }
+                    }
+
                     if ('unique' == $ruleName) {
                         //Điều kiện giá trị là duy nhất ...
                         $tableName = null;

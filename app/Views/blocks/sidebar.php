@@ -52,7 +52,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ __WEB__ROOT . '/staff/index'}}" class="nav-link">
+                            <a href="{{ __WEB__ROOT . '/nhan-vien/full-time'}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Toàn thời gian</p>
                             </a>
@@ -60,9 +60,17 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ __WEB__ROOT . '/nhan-vien/part-time'}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Bán thời gian</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ __WEB__ROOT . '/nhan-vien/thuc-tap'}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thực tập sinh</p>
                             </a>
                         </li>
                     </ul>

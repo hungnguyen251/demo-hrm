@@ -23,8 +23,13 @@ $routes['giai-thuong/them'] = 'reward/create';
 $routes['giai-thuong/sua'] = 'reward/edit';
 $routes['giai-thuong/xoa'] = 'reward/destroy';
 
-// $routes['nhan-vien'] = 'staff';
-// $routes['nhan-vien/danh-sach'] = 'staff/index';
+$routes['nhan-vien'] = 'staff';
+$routes['nhan-vien/full-time'] = 'staff/getStaffFulltime';
+$routes['nhan-vien/part-time'] = 'staff/getStaffParttime';
+$routes['nhan-vien/thuc-tap'] = 'staff/getInternship';
+$routes['nhan-vien/xoa'] = 'staff/destroy';
+$routes['nhan-vien/them'] = 'staff/create';
+$routes['nhan-vien/sua'] = 'staff/edit';
 
 // $routes['giai-thuong'] = 'reward';
 // $routes['giai-thuong/danh-sach'] = 'reward/index';
