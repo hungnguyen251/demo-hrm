@@ -59,7 +59,7 @@
                     <td>{{$staffs[$i]['marriage_status_name']}}</td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/tai-khoan/sua/' . $staffs[$i]['id']}}">Sửa</a>
+                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/nhan-vien/sua/' . $staffs[$i]['id']}}">Sửa</a>
                             <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="{{ __WEB__ROOT . '/nhan-vien/xoa/' . $staffs[$i]['id']}}">Xóa</a>
                         </div>
                     </td>

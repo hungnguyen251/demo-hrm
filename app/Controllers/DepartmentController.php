@@ -94,7 +94,7 @@ class DepartmentController extends Controller
         $leader = $this->db->table('staff_info')->select('staff_info.staff_fullname, staff_info.department_id')
                     ->leftJoin('position', 'staff_info.position_id = position.id')
                     ->where('position.position_name', '=', 'Trưởng phòng')
-                    ->where('staff_info.status', '=', '1')
+                    ->where('staff_info.status', '=', 'Active')
                     ->get();
 
         return $leader;

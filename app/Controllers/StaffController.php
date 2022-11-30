@@ -96,7 +96,7 @@ class StaffController extends Controller
         ->leftJoin('marriage_status', 'staff_info.marriage_code = marriage_status.id')
         ->leftJoin('staff_type', 'staff_info.staff_type_id = staff_type.id')
         ->where('staff_type.note', '=', 'fulltime')
-        ->orderBy('staff_info.status', 'DESC')
+        ->orderBy('staff_info.status', 'ASC')
         ->get();
 
         $this->data['sub_content']['staffs'] = $fulltime;
@@ -114,7 +114,7 @@ class StaffController extends Controller
         ->leftJoin('marriage_status', 'staff_info.marriage_code = marriage_status.id')
         ->leftJoin('staff_type', 'staff_info.staff_type_id = staff_type.id')
         ->where('staff_type.note', '=', 'parttime')
-        ->orderBy('staff_info.status', 'DESC')
+        ->orderBy('staff_info.status', 'ASC')
         ->get();
 
         $this->data['sub_content']['staffs'] = $parttime;
@@ -133,7 +133,7 @@ class StaffController extends Controller
         ->leftJoin('staff_type', 'staff_info.staff_type_id = staff_type.id')
         ->where('staff_type.note', '=', 'internship')
         ->orderBy('department_info.department_name')
-        ->orderBy('staff_info.status', 'DESC')
+        ->orderBy('staff_info.status', 'ASC')
         ->get();
 
         $this->data['sub_content']['staffs'] = $parttime;
@@ -143,6 +143,9 @@ class StaffController extends Controller
     }
 
     public function check($id='') {
+        if (isset($_FILES['avatar'])) {
+            Session::flash('inputImage', $_FILES['avatar']);
+        }
         Session::flash('inputImage', $_FILES['avatar']);
         $this->staffs->validateData();
 
@@ -179,10 +182,9 @@ class StaffController extends Controller
                 $staffType = $this->db->table('staff_type')->select('id')->where('staff_name','=', $sessionData['old_data_staff']['staff_type_id'])->first();
                 $marriage = $this->db->table('marriage_status')->select('id')->where('marriage_status_name','=', $sessionData['old_data_staff']['marriage_code'])->first();
                 $sessionData['old_data_staff']['staff_code'] = $staffCode;
-                var_dump('111');
+
                 if (!isset($sessionData['old_data_staff']['submit'])) {
                     Session::flash('status', 'add');
-
                     uploadFileImage($sessionData['inputImage']);
 
                     $data = [
@@ -215,6 +217,59 @@ class StaffController extends Controller
 
         $this->data['sub_content']['staffs'] = '';
         $this->data['content'] = 'staffs/add';
+
+        $this->render('layouts\client_layout', $this->data);
+    }
+
+    public function edit($id) {
+        global $config;
+        $staff = $this->db->table($this->table)->where('id','=', $id)->get();
+        $sessionData = isset($_SESSION[$config['session']['session_key']]) ? $_SESSION[$config['session']['session_key']] : [];
+
+        if (isset($sessionData['errors_staff']) && isset($sessionData['old_data_staff']['submit'])) {
+            if (!isset($sessionData['errors_staff']['staff_fullname']) && !isset($sessionData['errors_staff']['avatar']) && !isset($sessionData['errors_staff']['gender']) && !isset($sessionData['errors_staff']['date_of_birth']) && !isset($sessionData['errors_staff']['date_start_work']) && !isset($sessionData['errors_staff']['marriage_code']) && !isset($sessionData['errors_staff']['id_number']) && !isset($sessionData['errors_staff']['staff_type_id']) && !isset($sessionData['errors_staff']['diploma_id']) && !isset($sessionData['errors_staff']['department_id']) && !isset($sessionData['errors_staff']['position_id'])) {
+                unset($sessionData['old_data_staff']['submit']);
+                $diploma = $this->db->table('diploma')->select('id')->where('diploma_name','=', $sessionData['old_data_staff']['diploma_id'])->first();
+                $department = $this->db->table('department_info')->select('id')->where('department_name','=', $sessionData['old_data_staff']['department_id'])->first();
+                $position = $this->db->table('position')->select('id')->where('position_name','=', $sessionData['old_data_staff']['position_id'])->first();
+                $staffType = $this->db->table('staff_type')->select('id')->where('staff_name','=', $sessionData['old_data_staff']['staff_type_id'])->first();
+                $marriage = $this->db->table('marriage_status')->select('id')->where('marriage_status_name','=', $sessionData['old_data_staff']['marriage_code'])->first();
+                if (!isset($sessionData['old_data_staff']['submit'])) {
+                    Session::flash('status', 'edit');
+
+                    if (isset($sessionData['inputImage'])) {
+                        uploadFileImage($sessionData['inputImage']);
+                    }
+
+                    $data = [
+                        'avatar' => isset($sessionData['old_data_staff']['avatar']) ? strval($sessionData['old_data_staff']['avatar']) : '',
+                        'staff_fullname' => isset($sessionData['old_data_staff']['staff_fullname']) ? strval($sessionData['old_data_staff']['staff_fullname']) : '',
+                        'nickname' => isset($sessionData['old_data_staff']['nickname']) ? strval($sessionData['old_data_staff']['nickname']) : '',
+                        'gender' => isset($sessionData['old_data_staff']['gender']) ? strval($sessionData['old_data_staff']['gender']) : '',
+                        'date_of_birth' => isset($sessionData['old_data_staff']['date_of_birth']) ? date('Y-m-d',strtotime(str_replace('/', '-', $sessionData['old_data_staff']['date_of_birth']))) : '',
+                        'date_start_work' => isset($sessionData['old_data_staff']['date_start_work']) ? date('Y-m-d',strtotime(str_replace('/', '-', $sessionData['old_data_staff']['date_start_work']))) : '',
+                        'marriage_code' => isset($marriage['id']) ? intval($marriage['id']) : 1,
+                        'id_number' => isset($sessionData['old_data_staff']['id_number']) ? intval($sessionData['old_data_staff']['id_number']) : 000000000,
+                        'diploma_id' => isset($diploma['id']) ? intval($diploma['id']) : 0,
+                        'staff_type_id' => isset($staffType['id']) ? intval($staffType['id']) : 2,
+                        'department_id' => isset($department['id']) ? intval($department['id']) : 25,
+                        'position_id' => isset($position['id']) ? intval($position['id']) : 33,
+                        'date_issue_id' => isset($sessionData['old_data_staff']['date_issue_id']) ? date('Y-m-d',strtotime(str_replace('/', '-', $sessionData['old_data_staff']['date_issue_id']))) : '',
+                        'place_issue_id' => isset($sessionData['old_data_staff']['place_issue_id']) ? strval($sessionData['old_data_staff']['place_issue_id']) : '',
+                        'domicile' => isset($sessionData['old_data_staff']['domicile']) ? strval($sessionData['old_data_staff']['domicile']) : '',
+                        'hobby' => isset($sessionData['old_data_staff']['hobby']) ? strval($sessionData['old_data_staff']['hobby']) : '',
+                        'status' => 'Active'
+                    ];
+
+                    $this->update($sessionData['old_data_staff'], $id);
+                    $this->response->redirect('nhan-vien/full-time');
+                    exit;
+                }
+            }
+        }
+
+        $this->data['sub_content']['staff'] = $staff;
+        $this->data['content'] = 'staffs/edit';
 
         $this->render('layouts\client_layout', $this->data);
     }

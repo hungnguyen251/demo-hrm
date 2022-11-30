@@ -35,6 +35,7 @@
         Session::delete('msg_staff');
         Session::delete('old_data_staff');
         Session::delete('status');
+        Session::delete('inputImage');
       @endphp
     </section>
 
@@ -76,16 +77,16 @@
                     <td>{{$staffs[$i]['diploma_name']}}</td>
                     <td>
                         @if ($staffs[$i]['status'] == 'Active') 
-                            <span style="background-color:#C6F6E4;color:#06C935;padding: 5px 10px;border-radius:15px;">Đang làm việc</span>
+                            <p style="background-color:#C6F6E4;color:#06C935;padding: 5px 10px;border-radius:15px;"><i class="fa fa-circle" aria-hidden="true" style="font-size: 8px;"></i>Đang làm việc</p>
                         @else
-                            <span style="background-color:#F8B9B1;color:#E72108;padding: 5px 10px;border-radius:15px;">Đã nghỉ việc</span>
+                            <p style="background-color:#F8B9B1;color:#E72108;padding: 5px 10px;border-radius:15px;"><i class="fa fa-circle" aria-hidden="true" style="font-size: 8px;"></i>Đã nghỉ việc</p>
                         @endif
                     </td>
                     <td>{{$staffs[$i]['id_number']}}</td>
                     <td>{{$staffs[$i]['marriage_status_name']}}</td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/tai-khoan/sua/' . $staffs[$i]['id']}}">Sửa</a>
+                            <a class="btn btn-warning" href="{{ __WEB__ROOT . '/nhan-vien/sua/' . $staffs[$i]['id']}}">Sửa</a>
                             <a class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" href="{{ __WEB__ROOT . '/nhan-vien/xoa/' . $staffs[$i]['id']}}">Xóa</a>
                         </div>
                     </td>
